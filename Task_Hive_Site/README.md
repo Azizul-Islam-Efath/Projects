@@ -15,7 +15,7 @@
 
 <br>
 
-**Worker • Employer • Admin • Wallet • Campaigns • Proof Verification • Referrals • Support**
+**Worker • Employer • Admin • Wallet • Campaigns • Proof Verification • Referrals • Support • Production Infrastructure**
 
 </div>
 
@@ -445,6 +445,56 @@ The platform's financial model includes campaign budgets, platform fees, proof-r
 
 ---
 
+# ☁️ Production Infrastructure & Deployment
+
+Tomar Kaj uses a distributed production setup where each service is responsible for a specific part of the application.
+
+```text
+                         ┌──────────────────────┐
+                         │   Namecheap Domain   │
+                         │     tomarkaj.com     │
+                         └──────────┬───────────┘
+                                    │
+                              DNS / Domain
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │      Vercel          │
+                         │  React Frontend      │
+                         └──────────┬───────────┘
+                                    │
+                               REST API
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │       Render         │
+                         │ Node / Express API   │
+                         └───────┬────────┬─────┘
+                                 │        │
+                    Database     │        │ Uploaded Files
+                                 │        │
+                                 ▼        ▼
+                         ┌────────────┐ ┌──────────────┐
+                         │   Aiven    │ │ Cloudflare   │
+                         │   MySQL    │ │     R2       │
+                         └────────────┘ │ Object Store │
+                                        └──────────────┘
+```
+
+### Infrastructure Responsibilities
+
+| Service | Role |
+|---|---|
+| 🌐 **Namecheap** | Domain registration for `tomarkaj.com` |
+| ▲ **Vercel** | Frontend hosting and deployment |
+| 🚀 **Render** | Backend/API hosting |
+| 🗄️ **Aiven** | Managed MySQL database infrastructure |
+| ☁️ **Cloudflare R2** | Object storage for uploaded files/assets |
+
+This separation keeps the frontend, backend, database, object storage, and domain infrastructure independently managed while allowing them to work together as one production application.
+
+---
+
 # 🧰 Technology Stack
 
 ## Frontend
@@ -488,12 +538,16 @@ The platform's financial model includes campaign budgets, platform fees, proof-r
 <img src="https://img.shields.io/badge/MySQL-2026?style=for-the-badge&logo=mysql&logoColor=white&color=4479A1" alt="MySQL">
 <img src="https://img.shields.io/badge/Vercel-2026?style=for-the-badge&logo=vercel&logoColor=white&color=000000" alt="Vercel">
 <img src="https://img.shields.io/badge/Render-2026?style=for-the-badge&logo=render&logoColor=white&color=46E3B7" alt="Render">
+<img src="https://img.shields.io/badge/Cloudflare_R2-2026?style=for-the-badge&logo=cloudflare&logoColor=white&color=F38020" alt="Cloudflare R2">
+<img src="https://img.shields.io/badge/Namecheap-Domain-2026?style=for-the-badge&logo=namecheap&logoColor=white&color=DE3723" alt="Namecheap">
 </p>
 
 - MySQL
-- Vercel
-- Render
-- Aiven
+- Vercel — frontend deployment
+- Render — backend/API deployment
+- Aiven — managed MySQL database hosting
+- Cloudflare R2 — object/file storage for uploaded assets
+- Namecheap — domain registration
 
 ---
 
@@ -633,7 +687,7 @@ I developed Tomar Kaj across the complete application lifecycle, from user-facin
 | **Database** | MySQL |
 | **Authentication** | JWT + Refresh Tokens |
 | **Payments** | bKash / Nagad workflows |
-| **Deployment** | Vercel / Render / Aiven |
+| **Infrastructure** | Vercel / Render / Aiven / Cloudflare R2 / Namecheap |
 | **Former Name** | TaskHive |
 
 ---
