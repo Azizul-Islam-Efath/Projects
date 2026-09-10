@@ -742,11 +742,7 @@ This documentation focuses on the product, architecture, functionality, engineer
 
 **Connecting Employers with Workers through a modern task marketplace.**
 
-<br>
 
-Built with ❤️ by **Azizul Islam Efath**
-
-<br>
 
 [🌐 Live Website](https://www.tomarkaj.com/) •
 [💻 GitHub](https://github.com/Azizul-Islam-Efath) •
